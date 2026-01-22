@@ -1,0 +1,6 @@
+# Ignorar el directorio "pack"
+pack/
+
+# Ignorar el archivo "lazy-lock.json"
+lazy-lock.json
+

@@ -1,0 +1,33 @@
+# --- Directorios de Aplicaciones (Caché y Sesiones) ---
+google-chrome-unstable/
+firefox/
+vesktop/
+spotify/
+libreoffice/
+obs-studio/
+OpenRGB/
+kdeconnect/
+dconf/
+pulse/
+go/telemetry/
+paru/
+
+# --- Extensiones de Archivos Binarios y Temporales ---
+*.db
+*.pma
+*.pyc
+*.o
+*.so
+*.bin
+*.log
+*.bak
+*.pem
+*.history
+cookie
+
+# --- Archivos de sistema local innecesarios ---
+nautilus/
+gtk-4.0/
+menus/
+QtProject.conf
+user-dirs.locale
