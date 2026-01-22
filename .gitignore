@@ -31,3 +31,5 @@ gtk-4.0/
 menus/
 QtProject.conf
 user-dirs.locale
+easyeffects/db/easyeffectsrc
+composer/.htaccess
