@@ -1,10 +1,37 @@
----
 program_options:
+  # Mostrar icono en la bandeja del sistema (Waybar)
   tray: true
+
+  # Montar dispositivos automáticamente al conectarlos
   automount: true
+
+  # Mostrar notificaciones
   notify: true
+
+  # Comando para abrir la carpeta (xdg-open usará Nautilus o Yazi según tu sistema)
   file_manager: xdg-open
+
+  # Comando para ejecutar terminal en la carpeta (opcional)
+  # terminal: kitty -d
+
 notifications:
-  timeout: 1.5
+  # Tiempo por defecto para notificaciones (en segundos)
+  # 1.5 es muy poco, subido a 5 para que dé tiempo a leer
+  timeout: 5
+
+  # Tiempo específico para mensajes de montaje/desmontaje
   device_mounted: 5
-  device_unmounted: true
+  device_unmounted: 5
+
+  # Ocultar notificaciones de "Medio detectado" (suelen ser redundantes si ya se montó)
+  media_added: false
+  media_removed: false
+
+# Iconos (Nombres estándar de temas GTK/Adwaita)
+icon_names:
+  media: drive-removable-media
+  browse: folder-open
+  mount: media-mount
+  unmount: media-eject
+  lock: system-lock-screen
+  unlock: system-unlock-screen

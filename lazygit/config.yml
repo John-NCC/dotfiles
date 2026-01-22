@@ -1,76 +1,90 @@
-# NOTE: this is my personal config file for lazygit, the best git client
-# INFO: commitizen integration teaked from https://github.com/jesseduffield/lazygit/issues/41 thanks
-# to https://github.com/leikoilja
+# NOTA: Archivo de configuración personal para Lazygit.
+# INFO: Integración de "Conventional Commits" adaptada para John-NCC.
+#       Presiona 'C' en la vista de archivos para usar el asistente de commits.
 
-# yamllint disable rule:line-length
----
 gui:
+  # Usa iconos de Nerd Fonts v3 (compatible con tu configuración de Kitty/Fastfetch)
   nerdFontsVersion: "3"
+  
+  # Mostrar estructura de árbol en lugar de lista plana
+  showFileTree: true
+  
+  # Estética de bordes (redondeados para coincidir con btop)
+  theme:
+    activeBorderColor:
+      - green
+      - bold
+    inactiveBorderColor:
+      - white
+    selectedLineBgColor:
+      - reverse
+    optionsTextColor:
+      - blue
+
 customCommands:
   - key: "C"
-    command: 'git commit -m "{{ .Form.Type }}{{if .Form.Scopes}}({{ .Form.Scopes }}){{end}}{{if eq .Form.Breaking
-      `yes`}}!{{end}}: {{ .Form.Description }}"'
-    description: "commit with commitizen"
+    command: 'git commit -m "{{ .Form.Type }}{{if .Form.Scopes}}({{ .Form.Scopes }}){{end}}{{if eq .Form.Breaking `yes`}}!{{end}}: {{ .Form.Description }}"'
+    description: "Commit con asistente (Conventional Commits)"
     context: "files"
+    loadingText: "Creando commit..."
     prompts:
       - type: "menu"
-        title: "Select the type of change you are committing."
+        title: "Selecciona el tipo de cambio:"
         key: "Type"
         options:
-          - name: "Feature"
-            description: "A new feature"
+          - name: "Funcionalidad (feat)"
+            description: "Una nueva característica para el usuario"
             value: "feat"
-          - name: "Fix"
-            description: "A bug fix"
+          - name: "Corrección (fix)"
+            description: "Arreglo de un bug"
             value: "fix"
-          - name: "Documentation"
-            description: "Documentation only changes"
+          - name: "Documentación (docs)"
+            description: "Cambios solo en documentación"
             value: "docs"
-          - name: "Styles"
-            description: "Changes that do not affect the meaning of the code (white-space, formatting,
-              missing semi-colons, etc)"
+          - name: "Estilos (style)"
+            description: "Espacios, punto y coma, formato (no afecta lógica)"
             value: "style"
-          - name: "Code Refactoring"
-            description: "A code change that neither fixes a bug nor adds a feature"
+          - name: "Refactorización (refactor)"
+            description: "Cambio de código que no arregla bugs ni añade funcionalidades"
             value: "refactor"
-          - name: "Performance Improvements"
-            description: "A code change that improves performance"
+          - name: "Rendimiento (perf)"
+            description: "Mejora el rendimiento del código"
             value: "perf"
-          - name: "Tests"
-            description: "Adding missing tests or correcting existing tests"
+          - name: "Tests (test)"
+            description: "Añadir o corregir tests"
             value: "test"
-          - name: "Builds"
-            description: >
-              Changes that affect the build system or external dependencies (example scopes: gulp, broccoli,
-              npm) #magic___^_^___line
+          - name: "Build (build)"
+            description: "Cambios en sistema de compilación o dependencias (npm, gulp)"
             value: "build"
-          - name: "Continuous Integration"
-            description: "Changes to our CI configuration files and scripts (example scopes: Travis, Circle,
-              BrowserStack, SauceLabs)"
+          - name: "CI (ci)"
+            description: "Cambios en integración continua (GitHub Actions, Travis)"
             value: "ci"
-          - name: "Chores"
-            description: "Other changes that don't modify src or test files"
+          - name: "Mantenimiento (chore)"
+            description: "Cambios menores que no modifican src o tests"
             value: "chore"
-          - name: "Reverts"
-            description: "Reverts a previous commit"
+          - name: "Revertir (revert)"
+            description: "Revertir un commit anterior"
             value: "revert"
+      
       - type: "input"
-        title: "Enter the scope(s) of this change."
+        title: "Ámbito/Scope (Opcional):"
+        description: "Ej: ui, api, login (Enter para omitir)"
         key: "Scopes"
+      
       - type: "input"
-        title: "Enter the short description of the change."
+        title: "Descripción corta:"
+        description: "Usa imperativo (ej: 'añadir botón' en vez de 'añadido...')"
         key: "Description"
+      
       - type: "menu"
-        title: "Is this a breaking change?"
+        title: "¿Es un cambio que rompe compatibilidad (Breaking Change)?"
         key: "Breaking"
         options:
           - name: "No"
-            description: "This change does not introduce a breaking change."
             value: "no"
-          - name: "Yes"
-            description: "This change introduces a breaking change."
+          - name: "Sí (Añade '!' al tipo)"
             value: "yes"
+      
       - type: "confirm"
-        title: "Is the commit message correct?"
-        body: "{{ .Form.Type }}{{if .Form.Scopes}}({{ .Form.Scopes }}){{end}}{{if eq .Form.Breaking `yes`}}!{{end}}:
-          {{ .Form.Description }}"
+        title: "¿Confirmar mensaje de commit?"
+        body: "{{ .Form.Type }}{{if .Form.Scopes}}({{ .Form.Scopes }}){{end}}{{if eq .Form.Breaking `yes`}}!{{end}}: {{ .Form.Description }}"

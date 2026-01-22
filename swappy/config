@@ -1,7 +1,35 @@
 [Default]
-save_dir=$HOME/.screenshot
-save_filename_format=%Y%m%d-%H%M%S.png
+# -----------------------------
+# Guardado de Archivos
+# -----------------------------
+# Directorio donde se guardan las capturas editadas.
+# Recomendado: Usar la carpeta de Imágenes estándar en lugar de una oculta.
+save_dir=$HOME/Pictures/Screenshots
+
+# Formato del nombre de archivo (AñoMesDia-HoraMinutoSegundo.png)
+save_filename_format=swappy-%Y%m%d-%H%M%S.png
+
+# -----------------------------
+# Interfaz y Herramientas
+# -----------------------------
+# Mostrar el panel de edición al iniciar
 show_panel=true
-line_size=3
-text_size=14
-text_font=Hack
+
+# Grosor de línea inicial (para flechas y dibujos)
+line_size=5
+
+# Tamaño de texto inicial
+text_size=20
+
+# Fuente para el texto. 
+# Usamos 'JetBrains Mono' para consistencia con tu terminal y editor.
+# Asegúrate de usar el nombre exacto de la familia de la fuente (fc-list).
+text_font=JetBrains Mono
+
+# -----------------------------
+# Colores de Pintura (Opcional)
+# -----------------------------
+# Puedes personalizar los colores rápidos aquí si quieres colores Gruvbox
+# paint_mode=brush
+# early_exit=false
+# fill_shape=false

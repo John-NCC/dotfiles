@@ -1,71 +1,93 @@
-# NOTE: Maps application identifiers (executable or window-title regex)
-# to icon glyphs. Specific patterns must precede more general ones.
-#
-# NOTE: To add a new mapping:
-# • Under [matching], add 'app-id' = 'glyph'
-# • For regex, wrap the key in forward slashes: '/pattern/' = 'glyph'
+# NOTA: Mapeo de aplicaciones a iconos (Nerd Fonts) para Sway
+# INFO: Sworkstyle renombra los espacios de trabajo dinámicamente
 
-# The string used between multiple icons (if a match yields >1 glyph)
+# Separador entre iconos si hay varias apps en el mismo workspace
 separator = ' '
 
 [matching]
 
-# ---------------
-# JetBrains IDEs
-# ---------------
-'jetbrains-idea-ce' = ''
-'jetbrains-idea' = ''
+# -------------------------
+# Terminales y Editores
+# -------------------------
+# Detectar Neovim por título (nvim + nombre de archivo opcional)
+'/nvim.*/' = ''
+'/vim.*/' = ''
+# Detectar Yazi (Gestor de archivos)
+'/Yazi.*/' = ''
+# Detectar Lazygit
+'/lazygit/' = ''
+# Terminales genéricas
+'kitty' = ''
+'cool-retro-term.cool-retro-term' = ''
+'Alacritty' = ''
 
 # -------------------------
-# Browsers & Private Modes
+# Navegadores y Web
 # -------------------------
+'firefox' = '󰈹'
 'firefox-developer-edition' = '󰈹'
-'/Google Chrome/' = ''
+'Google-chrome' = ''
+'Chromium-browser' = ''
+'Brave-browser' = '🦁'
 '/Private Browsing/' = '󱀣'
 '/Picture-in-Picture/' = '󰹗'
 
-# -----------------------
-# Communication & Social
-# -----------------------
+# -------------------------
+# Desarrollo y Herramientas
+# -------------------------
+'jetbrains-idea-ce' = ''
+'jetbrains-idea' = ''
+'code-oss' = '󰨞'
+'Code' = '󰨞'
+'deno' = ''
+'Postman' = ''
+'org.keepassxc.KeePassXC' = '󱕴'
+
+# -------------------------
+# Comunicación y Social
+# -------------------------
 'org.telegram.desktop' = ''
 'Skype' = '󰒯'
 '/Element/' = '󰯸'
 'vesktop' = ''
+'discord' = ''
 
-# --------------------
-# Terminals & Editors
-# --------------------
-'/nvim ?\w*/' = ''
-'/vim ?\w*/' = ''
-'/Yazi ?\w*/' = ''
-'kitty' = ''
-'cool-retro-term.cool-retro-term' = ''
+# -------------------------
+# Multimedia y Gráficos
+# -------------------------
+'mpv' = ''
+'imv' = ''
+'vlc' = '󰕼'
+'spotube' = ''
+'spotify' = ''
+'obs' = '󰑋'
+'com.obsproject.Studio' = '󰑋'
+'krita' = ''
+'gimp' = ''
+'inkscape' = ''
+'blender' = '󰂫'
+'com.github.wwmm.easyeffects' = '󰥠'
 
-# --------------------
-# System & Monitoring
-# --------------------
+# -------------------------
+# Sistema y Archivos
+# -------------------------
+# Gestores de archivos gráficos
+'org.gnome.Nautilus' = ''
+'thunar' = ''
+'pcmanfm' = ''
+# Monitores de sistema
 '/btop/' = ''
+'/htop/' = ''
 '/nmtui/' = ''
 '/pulsemixer/' = ''
+'pavucontrol' = ''
 
-# --------------------
-# Development & Tools
-# --------------------
-'deno' = ''
-'Postman' = ''
-
-# ----------------------
-# Media & Entertainment
-# ----------------------
-'spotube' = ''
-'mpv' = ''
-'steam' = ''
-
-# ----------------------
-# Productivity & Office
-# ----------------------
+# -------------------------
+# Oficina y Productividad
+# -------------------------
 'obsidian' = ''
 'org.pwmt.zathura' = ''
+'evince' = ''
 'libreoffice-startcenter' = '󰹯'
 'libreoffice-writer' = ''
 'libreoffice-calc' = ''
@@ -74,13 +96,10 @@ separator = ' '
 'libreoffice-base' = ''
 'soffice' = ''
 
-# ----------------------------
-# Graphics & Audio Processing
-# ----------------------------
-'krita' = ''
-'com.github.wwmm.easyeffects' = '󰥠'
-
-# ---------------------
-# Security & Passwords
-# ---------------------
-'org.keepassxc.KeePassXC' = '󱕴'
+# -------------------------
+# Juegos
+# -------------------------
+'steam' = ''
+'lutris' = '󰓇'
+'heroic' = '󰺵'
+'minecraft' = '󰍳'

@@ -2,27 +2,46 @@
    Volume & Backlight Slider Overrides
    ==================================== */
 
-/* Root variables */
 :root {
-  --slider-bg: rgb(80, 73, 69);
-  --slider-track: rgb(60, 56, 54);
-  --slider-fill: rgb(91, 83, 77);
+  --slider-bg: rgb(60, 56, 54);
+  --slider-fill: rgb(212, 190, 152); /* FG color */
+  --slider-fill-hover: rgb(231, 138, 78); /* Orange */
 }
 
-/* Style the overall slider background */
-.widget-volume slider,
-.widget-backlight slider {
+/* Label Icon */
+.widget-volume > box > label,
+.widget-backlight > box > label {
+  font-size: 1.5rem;
+  color: var(--text-color);
+  margin-right: 12px;
+}
+
+/* Slider Track (Background) */
+.widget-volume scale trough,
+.widget-backlight scale trough {
   background-color: var(--slider-bg);
+  border-radius: 12px;
+  min-height: 8px;
 }
 
-/* Style the unfilled track (trough) */
-.widget-volume trough,
-.widget-backlight trough {
-  background: var(--slider-track);
+/* Slider Highlight (Filled part) */
+.widget-volume scale trough highlight,
+.widget-backlight scale trough highlight {
+  background-color: var(--slider-fill);
+  border-radius: 12px;
+  transition: background-color 0.2s ease;
 }
 
-/* Style the filled portion (highlight) */
-.widget-volume trough highlight,
-.widget-backlight trough highlight {
-  background: var(--slider-fill);
+.widget-volume:hover scale trough highlight,
+.widget-backlight:hover scale trough highlight {
+  background-color: var(--slider-fill-hover);
+}
+
+/* Slider Handle (Knob) - Hidden for cleaner look, or style it */
+.widget-volume scale slider,
+.widget-backlight scale slider {
+  background-color: transparent;
+  box-shadow: none;
+  min-height: 0px;
+  min-width: 0px;
 }

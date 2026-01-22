@@ -1,23 +1,23 @@
-/* --------------
+/* ----------------
    DND Variables
-   -------------- */
+   ---------------- */
 :root {
-  --dnd-label-margin: 8px;
-  --dnd-label-size: 1.1rem;
-  --dnd-switch-bg: rgb(80, 73, 69);
-  --dnd-switch-hover: rgb(102, 92, 84);
-  --dnd-switch-checked-bg: rgb(231, 138, 78);
-  --dnd-thumb-bg: rgb(212, 190, 152);
-  --dnd-thumb-checked-bg: rgb(37, 36, 35);
-  --dnd-border-radius: 12px;
+  --dnd-switch-bg: rgb(60, 56, 54); /* Gruvbox Grey */
+  --dnd-switch-hover: rgb(80, 73, 69);
+  --dnd-switch-checked-bg: rgb(211, 134, 155); /* Gruvbox Purple or use Orange #e78a4e */
+  --dnd-thumb-bg: rgb(212, 190, 152); /* FG */
+  --dnd-thumb-checked-bg: rgb(40, 40, 40); /* BG */
+  --dnd-border-radius: 8px;
 }
 
 /* ------
    Label
    ------ */
 .widget-dnd > label {
-  margin: var(--dnd-label-margin);
-  font-size: var(--dnd-label-size);
+  margin: 12px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: var(--text-color);
 }
 
 /* --------------------------
@@ -26,16 +26,15 @@
 .widget-dnd switch {
   background-color: var(--dnd-switch-bg);
   border-radius: var(--dnd-border-radius);
-  margin: var(--dnd-label-margin);
+  margin: 12px;
+  box-shadow: none;
   transition: background 0.15s ease-in-out;
 }
 
-/* Hover state */
 .widget-dnd switch:hover {
   background-color: var(--dnd-switch-hover);
 }
 
-/* Checked state (DND enabled) */
 .widget-dnd switch:checked {
   background-color: var(--dnd-switch-checked-bg);
 }
@@ -48,7 +47,6 @@
   border-radius: var(--dnd-border-radius);
 }
 
-/* Thumb when checked */
-.widget-dnd swiLtch:checked slider {
+.widget-dnd switch:checked slider {
   background-color: var(--dnd-thumb-checked-bg);
 }

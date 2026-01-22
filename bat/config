@@ -1,39 +1,48 @@
-# NOTE: bat — A modern `cat` clone with syntax highlighting & Git integration
-# INFO: Full docs: https://github.com/sharkdp/bat
+# INFORMACIÓN: Documentación completa: https://github.com/sharkdp/bat
 
 # --------------------
-# Appearance & Themes
+# Apariencia y Temas
 # --------------------
 
-# Set theme
+# Establecer tema
+# Nota: "gruvbox-dark" coincide con tu configuración de Zathura/Nvim.
 --theme="gruvbox-dark"
 
-# Style components to display:
-# numbers  → show line numbers
-# changes  → mark Git-modified lines
-# header   → display filename header
-# grid     → draw borders around the text
---style="numbers,changes,header,grid"
+# Estilo de los componentes a mostrar:
+# numbers : muestra números de línea
+# changes : marca líneas modificadas en Git
+# header  : muestra el nombre del archivo arriba
+# grid    : dibuja bordes alrededor del texto
+# snip    : muestra separadores cuando se recortan rangos de líneas
+--style="numbers,changes,header,grid,snip"
 
-# Enable italics.
+# Habilitar cursivas (Kitty lo soporta perfectamente)
 --italic-text="always"
 
-# --------------------------
-# Whitespace & Line Control
-# --------------------------
+# ----------------------------
+# Espacios y Control de Líneas
+# ----------------------------
 
-# Squeeze multiple empty lines into one.
+# Colapsar múltiples líneas vacías consecutivas en una sola.
+# (Equivalente a `cat -s`)
 --squeeze-blank
 
-# Limit the maximum number of consecutive blank lines.
---squeeze-limit=2
-
-# Preserve tabs exactly as in file, or expand them to N spaces.
+# Preservar tabulaciones o expandirlas a N espacios.
 --tabs=2
 
-# ----------------
-# Paging Behavior
-# ----------------
+# -------------------------
+# Comportamiento de Paginación
+# -------------------------
 
-# Automatically use a pager (`less -RF`) only when output is larger than one screen.
+# Usar paginador (`less`) automáticamente solo si el archivo es más grande que la pantalla.
 --paging="auto"
+
+# -------------------
+# Mapeo de Sintaxis
+# -------------------
+
+# Forzar coloreado de sintaxis para archivos que bat no reconoce automáticamente.
+# Tratar archivos .conf como .ini para mejorar los colores en tus dotfiles.
+--map-syntax "*.conf:INI"
+--map-syntax "*.rasi:CSS"
+--map-syntax "*.ignore:Git Ignore"

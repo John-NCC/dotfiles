@@ -1,11 +1,44 @@
+# ----------------------------------------
+# Perfil: Monitor Externo a la Derecha (Dual)
+# ----------------------------------------
 profile right-full-hd {
+  # Pantalla del Laptop (Izquierda)
   output eDP-1 mode 1920x1080 position 0,0
+
+  # Monitor Externo HDMI (Derecha)
+  # Ajusta la posición (1920,0) según el ancho de tu pantalla de laptop.
   output HDMI-A-1 mode 1920x1080 position 1920,0
-  exec swaymsg workspace 1, move workspace to output '"eDP-1"'
-  exec swaymsg workspace 2, move workspace to output '"HDMI-A-1"'
+
+  # Mover espacios de trabajo a sus pantallas correspondientes
+  exec swaymsg workspace 1, move workspace to output eDP-1
+  exec swaymsg workspace 2, move workspace to output HDMI-A-1
+
+  # TRUCO PRO: Recargar Waybar para que aparezca en el nuevo monitor
+  exec systemctl --user reload waybar
 }
 
+# ----------------------------------------
+# Perfil: Solo Laptop (Móvil)
+# ----------------------------------------
 profile laptop-only {
   output eDP-1 mode 1920x1080 position 0,0
-  exec swaymsg workspace 1, move workspace to output '"eDP-1"'
+  
+  # Asegurar que el espacio de trabajo principal vuelva a la pantalla interna
+  exec swaymsg workspace 1, move workspace to output eDP-1
+
+  # Desactivar otras salidas fantasmas si es necesario (opcional)
+  # output HDMI-A-1 disable
+
+  # Recargar Waybar para ajustar los módulos
+  exec systemctl --user reload waybar
 }
+
+# ----------------------------------------
+# Perfil: Comodín (Cualquier otro monitor)
+# ----------------------------------------
+# Esto activará cualquier monitor extra automáticamente a la derecha
+# si no coincide con "HDMI-A-1".
+# profile output-detected {
+#   output eDP-1 enable
+#   output * mode 1920x1080 position 1920,0
+# }

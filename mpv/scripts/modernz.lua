@@ -1,4 +1,4 @@
--- ModernZ (https://github.com/Samillion/ModernZ)
+-- ModernZhttps://github.com/Samillion/ModernZ)
 --
 -- This script is a derivative of the original mpv-osc-modern by maoiscat
 -- and subsequent forks:

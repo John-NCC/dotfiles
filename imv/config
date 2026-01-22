@@ -1,42 +1,72 @@
-# NOTE: imv image viewer configuration (INI format)
-# INFO: See `man imv` for full option reference
-
 [options]
 
 # --------------------------
-# Window & Display Settings
+# Ventana y Visualización
 # --------------------------
-background                = 32302f
-fullscreen                = false
-width                     = 1280
-height                    = 720
-initial_pan               = 50 50
+# Color de fondo (Hexadecimal o 'checks' para tablero de ajedrez).
+# Tu color: 32302f (Gruvbox Dark Hard)
+background = 32302f
+
+# Iniciar en pantalla completa (true/false).
+fullscreen = false
+
+# Tamaño inicial de la ventana si no es fullscreen.
+width = 1280
+height = 720
+
+# Posición inicial de la imagen (Centro = 50 50).
+initial_pan = 50 50
 
 # ------------------
-# File & Navigation
+# Archivos y Navegación
 # ------------------
-recursively               = true
-loop_input                = true
-list_files_at_exit        = false
+# Cargar imágenes recursivamente si se abre una carpeta.
+recursively = true
+
+# Volver al principio al llegar a la última imagen.
+loop_input = true
+
+# Imprimir la lista de archivos abiertos al salir (útil para scripts).
+list_files_at_exit = false
 
 # --------------------
-# Scaling & Slideshow
+# Escalado y Presentación
 # --------------------
-scaling_mode              = full
-slideshow_duration        = 0
+# Modo de escalado:
+# 'none': Tamaño original.
+# 'shrink': Reduce si es grande, mantiene si es pequeña (Recomendado para nitidez).
+# 'full': Ajusta siempre a la ventana (Tu configuración actual).
+# 'crop': Llena la ventana recortando bordes.
+scaling_mode = full
 
-# --------------
-# Overlay & HUD
-# --------------
-overlay                   = true
-overlay_font              = Hack:10
-overlay_text_color        = d4be98
-overlay_text_alpha        = ff
-overlay_background_color  = 252423
-overlay_background_alpha  = 99
-overlay_position_bottom   = false
+# Duración de diapositivas en segundos (0 = desactivado).
+slideshow_duration = 0
 
-# ------------
-# Keybindings
-# ------------
-suppress_default_binds    = false
+# ----------------
+# Interfaz (HUD)
+# ----------------
+# Mostrar barra de información superpuesta.
+overlay = true
+
+# Fuente del HUD. Usamos 'Monospace' para respetar tu configuración de fontconfig.
+overlay_font = Monospace:11
+
+# Colores del texto y fondo (Gruvbox).
+overlay_text_color = d4be98
+overlay_text_alpha = ff
+overlay_background_color = 252423
+overlay_background_alpha = 99
+
+# Posición de la barra (false = arriba, true = abajo).
+overlay_position_bottom = false
+
+# ----------------
+# Atajos de Teclado
+# ----------------
+# Desactivar atajos predeterminados (false = mantener los de Vim por defecto).
+suppress_default_binds = false
+
+# [binds]
+# Puedes añadir atajos personalizados aquí. Ejemplos:
+# <Delete> = exec rm "$imv_current_file"; close
+# r = rotate by 90

@@ -1,40 +1,73 @@
+# ----------------------------------------------------------------------
+# Configuración de Swaylock (Requiere swaylock-effects)
+# Tema: Gruvbox Material Dark
+# ----------------------------------------------------------------------
+
+# --- Comportamiento ---
 ignore-empty-password
 daemonize
-fade-in=0.7
-indicator
-clock
-datestr=%d/%m/%Y
-screenshots
+show-failed-attempts
 show-keyboard-layout
-indicator-caps-lock
-bs-hl-color=7daea3cc
-caps-lock-bs-hl-color=7daea3cc
-caps-lock-key-hl-color=d3869bcc
+
+# --- Apariencia General ---
 font=JetBrains Mono
-font-size=35
+font-size=24
+color=1d2021
+
+# --- Indicador (Círculo) ---
+indicator
+indicator-radius=120
+indicator-thickness=10
+indicator-caps-lock
+
+# Si no hay actividad, oculta el círculo
 indicator-idle-visible
-indicator-radius=100
-indicator-thickness=7
-inside-color=32302f66
-inside-clear-color=89b48266
-inside-caps-lock-color=e78a4e66
-inside-ver-color=7daea366
-inside-wrong-color=ea696266
-key-hl-color=a9b665cc
-layout-bg-color=32302f00
-layout-text-color=d4be98
-line-color=00000000
-ring-color=e78a4ecc
-ring-clear-color=89b482cc
-ring-caps-lock-color=e78a4ecc
-ring-ver-color=7daea3cc
-ring-wrong-color=ea6962cc
-separator-color=00000000
-text-color=d4be98
-text-clear-color=d4be98
-text-caps-lock-color=d4be98
-text-ver-color=d4be98
-text-wrong-color=d4be98
-effect-blur=10x5
-effect-greyscale
+
+# --- Efectos de Fondo (Swaylock Effects) ---
+screenshots
+fade-in=0.5
+effect-blur=7x5
 effect-vignette=0.5:0.5
+effect-greyscale
+
+# --- Reloj y Fecha ---
+clock
+timestr=%H:%M
+datestr=%A, %d de %B
+
+# --- Colores (Gruvbox con Transparencia) ---
+
+# Anillo exterior (Borde)
+ring-color=d4be98
+ring-ver-color=7daea3
+ring-wrong-color=ea6962
+ring-clear-color=d8a657
+ring-caps-lock-color=e78a4e
+
+# Interior del círculo
+inside-color=1d2021cc
+inside-ver-color=1d2021cc
+inside-wrong-color=1d2021cc
+inside-clear-color=1d2021cc
+inside-caps-lock-color=1d2021cc
+
+# Texto dentro del círculo
+text-color=d4be98
+text-ver-color=7daea3
+text-wrong-color=ea6962
+text-clear-color=d8a657
+text-caps-lock-color=e78a4e
+
+# Línea separadora (Invisible)
+line-color=00000000
+separator-color=00000000
+
+# Resaltado de teclas pulsadas (Feedback visual)
+key-hl-color=a9b665
+bs-hl-color=ea6962
+caps-lock-bs-hl-color=ea6962
+caps-lock-key-hl-color=e78a4e
+
+# Texto del layout (idioma)
+layout-bg-color=00000000
+layout-text-color=928374

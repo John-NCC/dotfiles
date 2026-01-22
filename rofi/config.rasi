@@ -1,115 +1,163 @@
-/* --------------
-   Core Behavior
-   -------------- */
+/* -------------------------------------------------------------------------
+   Configuración de Rofi - Tema Gruvbox Dark
+   ------------------------------------------------------------------------- */
+
 configuration {
-  threads: 0;
-  case-sensitive: false;
-  normalize-match: true;
-  cycle: true;
-  scroll-method: 1;
-  show-icons: true;
-  no-lazy-grab: true;
-
-  /* ---------------
-     Modes & Labels
-     --------------- */
-  modi: "calc,Clipboard:~/.bin/cliphist-rofi.sh,drun,power-menu:rofi-power-menu";
-  display-calc: "Calculator";
-  display-drun: "Application";
-
-  /* --------------
-     Window/Layout
-     -------------- */
-  location: 0;
-  sidebar-mode: true;
-  hover-select: true;
-  eh: 1;
-  terminal: "kitty";
+    /* --- Comportamiento --- */
+    modi:                       "drun,run,filebrowser,calc,window";
+    show-icons:                 true;
+    display-drun:               "  Apps";
+    display-run:                "  Run";
+    display-filebrowser:        "  Files";
+    display-window:             "  Window";
+    display-calc:               "  Calc";
+    drun-display-format:        "{name}";
+    window-format:              "{w} · {c} · {t}";
+    
+    /* --- Interacción --- */
+    case-sensitive:             false;
+    cycle:                      true;
+    scroll-method:              1;
+    normalize-match:            true;
+    no-lazy-grab:               true;
+    
+    /* --- Terminal --- */
+    terminal:                   "kitty";
 }
 
-@theme "/dev/null"
+/* -------------------------------------------------------------------------
+   Estilos y Colores
+   ------------------------------------------------------------------------- */
 
-/* -----------
-   Base Style
-   ----------- */
 * {
-  background-color: #32302f;
-  font-family:     "JetBrains Mono";
-  text-color:      #d4be98;
+    /* Paleta Gruvbox Dark Hard */
+    bg-col:  #1d2021;
+    bg-col-light: #282828;
+    border-col: #282828;
+    selected-col: #282828;
+    blue: #7daea3;
+    fg-col: #d4be98;
+    fg-col2: #d8a657;
+    grey: #928374;
+
+    /* Propiedades Globales */
+    background-color: @bg-col;
+    text-color: @fg-col;
+    /* CORRECCIÓN: Rofi usa 'font', no 'font-family'. Incluye el tamaño. */
+    font: "JetBrains Mono 12";
 }
 
-/* ------------------
-   Window Appearance
-   ------------------ */
+/* -------------------------------------------------------------------------
+   Estructura de la Ventana
+   ------------------------------------------------------------------------- */
+
 window {
-  border:         0.2%;
-  border-radius:  10px;
-  transparency:  "real";
-  width:          35%;
-  height:         500px;
+    height: 500px;
+    width: 600px;
+    border: 2px;
+    border-color: @border-col;
+    background-color: @bg-col;
+    border-radius: 10px;
 }
 
-/* ------------------
-   Scrollbar Styling
-   ------------------ */
-scrollbar {
-  enabled:           true;
-  background-color:  #252423;
-  handle-color:      #3c3836;
-  border-color:      #000000;
+mainbox {
+    background-color: @bg-col;
+    padding: 10px;
+    children: [inputbar, listview]; 
+    /* inputbar arriba, lista abajo */
 }
 
-/* ------------
-   List Layout
-   ------------ */
+/* -------------------------------------------------------------------------
+   Barra de Búsqueda (Input)
+   ------------------------------------------------------------------------- */
+
+inputbar {
+    children: [prompt, entry];
+    background-color: @bg-col;
+    border-radius: 5px;
+    padding: 2px;
+    margin: 0px 0px 10px 0px; 
+}
+
+prompt {
+    background-color: @blue;
+    padding: 6px;
+    text-color: @bg-col;
+    border-radius: 3px;
+    margin: 20px 0px 0px 20px;
+}
+
+textbox-prompt-colon {
+    expand: false;
+    str: ":";
+}
+
+entry {
+    padding: 6px;
+    margin: 20px 0px 0px 10px;
+    text-color: @fg-col;
+    background-color: @bg-col;
+    placeholder: "Buscar...";
+    placeholder-color: @grey;
+}
+
+/* -------------------------------------------------------------------------
+   Lista de Elementos
+   ------------------------------------------------------------------------- */
+
 listview {
-  columns:        1;
-  fixed-height:   false;
-  dynamic:        true;
-  scrollbar:      true;
-  spacing:        10px;
+    border: 0px 0px 0px;
+    padding: 6px 0px 0px;
+    margin: 10px 0px 0px 20px;
+    columns: 1;
+    lines: 8; /* Número de líneas visibles */
+    background-color: @bg-col;
+    spacing: 5px; /* Espacio entre elementos */
 }
 
-/* --------------
-   Input Padding
-   -------------- */
-prompt, entry {
-  padding: 10px;
+element {
+    padding: 8px;
+    background-color: @bg-col;
+    text-color: @fg-col;
+    border-radius: 5px;
+    orientation: horizontal;
+    spacing: 10px; /* Espacio entre icono y texto */
 }
 
-/* ----------------
-   Message Padding
-   ---------------- */
-textbox {
-  padding: 20px;
+element-icon {
+    size: 24px; /* Tamaño correcto para los iconos */
+    horizontal-align: 0.5;
+    background-color: inherit; /* Heredar color del elemento padre */
 }
 
-/* ----------------
-   Element Padding
-   ---------------- */
-element-text, button, listview {
-  padding: 5px;
+element-text {
+    vertical-align: 0.5;
+    background-color: inherit;
+    text-color: inherit;
 }
 
-/* ------------------------
-   Selected Item Highlight
-   ------------------------ */
-element.selected {
-  background-color: #665c54;
+/* Estado Seleccionado */
+element selected {
+    background-color:  @bg-col-light;
+    text-color: @fg-col2;
+    border: 1px;
+    border-color: @border-col;
 }
 
-/* ----------------
-   Selected Button
-   ---------------- */
-button.selected {
-  background-color: #e78a4e;
-  text-color:      #252423;
+/* Opcional: Modo Sidebar (si usas tabs) */
+mode-switcher {
+    spacing: 0;
 }
 
-/* ----------------------
-   Inherit Global Colors
-   ---------------------- */
-element-text, element-icon {
-  background-color: inherit;
-  text-color:       inherit;
+button {
+    padding: 10px;
+    background-color: @bg-col-light;
+    text-color: @grey;
+    vertical-align: 0.5; 
+    horizontal-align: 0.5;
+}
+
+button selected {
+    background-color: @bg-col;
+    text-color: @blue;
 }

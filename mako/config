@@ -1,37 +1,91 @@
-# NOTE: mako — A lightweight Wayland notification daemon
-# INFO: See https://github.com/emersion/mako for full option reference
+# NOTA: Demonio de notificaciones Mako
+# INFO: Configurado con tema Gruvbox y gestión de urgencias
 
 # ---------------------
-# Global Configuration
+# Configuración Global
 # ---------------------
-max-history=5
-sort=+time
+max-history=10
+# Ordenar por tiempo (las nuevas arriba)
+sort=-time
 
 # ----------------
-# Binding options
+# Comportamiento del Ratón
 # ----------------
+# Click izquierdo: cerrar notificación
 on-button-left=dismiss
+# Click derecho: cerrar todas
 on-button-right=dismiss-all
+# Click central: ejecutar la acción predeterminada (si tiene)
+on-button-middle=invoke-default-action
 
-# --------------
-# Style options
-# --------------
-font=Cantarell 10
-background-color=#252423
+# ----------------
+# Estilos Base (Gruvbox Dark)
+# ----------------
+# Coincide con tu GTK, subido a tamaño 11 para mejor lectura
+font=Cantarell 11
+background-color=#282828
 text-color=#d4be98
-width=300
-height=100
+
+width=350
+height=150
 margin=10
 padding=15
-border-size=0
+
+# Borde fino para separar del fondo de pantalla
+border-size=2
+border-color=#d4be98
 border-radius=5
+
+# Iconos
 icons=1
-max-icon-size=128
+max-icon-size=48
 icon-location=left
+
+# Formato de texto
 markup=1
 actions=1
 history=1
 text-alignment=left
-default-timeout=15000
-layer=top
-anchor=bottom-right
+
+# Tiempo por defecto: 5 segundos (más ágil)
+default-timeout=5000
+# Ignorar tiempo de espera si el ratón está encima
+ignore-timeout=1
+
+# Posición
+layer=overlay
+anchor=top-right
+
+# ---------------------
+# Estilos por Prioridad
+# ---------------------
+
+# Notificaciones de prioridad BAJA (ej: info musical)
+[urgency=low]
+background-color=#282828
+text-color=#928374
+border-color=#504945
+default-timeout=3000
+
+# Notificaciones de prioridad NORMAL (ej: mensajes, emails)
+[urgency=normal]
+background-color=#282828
+text-color=#d4be98
+border-color=#d4be98
+default-timeout=5000
+
+# Notificaciones CRÍTICAS (ej: batería baja, errores)
+# Fondo rojo, borde rojo, y NUNCA desaparecen solas (0)
+[urgency=critical]
+background-color=#cc241d
+text-color=#fbf1c7
+border-color=#fb4934
+default-timeout=0
+
+# ---------------------
+# Estilos por Categoría (Opcional)
+# ---------------------
+
+# Ejemplo: Hacer las capturas de pantalla un poco diferentes
+[category=screenshot]
+border-color=#8ec07c

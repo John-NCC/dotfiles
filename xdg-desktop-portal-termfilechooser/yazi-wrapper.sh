@@ -1,57 +1,53 @@
-#!/usr/bin/env sh
-# This wrapper script is invoked by xdg-desktop-portal-termfilechooser.
-#
-# For more information about input/output arguments read `xdg-desktop-portal-termfilechooser(5)`
+#!/usr/bin/env bash
+# Wrapper para integrar Yazi con xdg-desktop-portal-termfilechooser en Kitty
+# Autor: John-NCC (Optimized)
 
 set -e
 
-if [ "$6" -ge 4 ]; then
-    set -x
-fi
-
+# Argumentos pasados por el portal
 multiple="$1"
 directory="$2"
 save="$3"
 path="$4"
 out="$5"
 
-cmd="yazi"
-termcmd="${TERMCMD:-kitty --title 'termfilechooser'}"
+# Comando de terminal (Kitty)
+# Usamos el título "termfilechooser" para que Sway lo detecte y lo haga flotante
+TERM_CMD="kitty --title termfilechooser --"
 
+# Comando base de Yazi
+YAZI_CMD="yazi"
+
+# Lógica de selección según el modo (Abrir, Guardar, Directorio)
 if [ "$save" = "1" ]; then
-    # save a file
-    set -- --chooser-file="$out" "$path"
+    # MODO GUARDAR
+    # Yazi escribirá la ruta seleccionada en el archivo $out.
+    # Si 'path' existe, inicia ahí.
+    $TERM_CMD $YAZI_CMD --chooser-file="$out" "$path"
+
 elif [ "$directory" = "1" ]; then
-    # upload files from a directory
-    set -- --chooser-file="$out" --cwd-file="$out"".1" "$path"
-elif [ "$multiple" = "1" ]; then
-    # upload multiple files
-    set -- --chooser-file="$out" "$path"
-else
-    # upload only 1 file
-    set -- --chooser-file="$out" "$path"
-fi
-
-command="$termcmd $cmd"
-for arg in "$@"; do
-    # escape double quotes
-    escaped=$(printf "%s" "$arg" | sed 's/"/\\"/g')
-    # escape special
-    case "$termcmd" in
-	*"ghostty"*)
-	    command="$command \"\\\"$escaped\\\"\"";;
-	*)
-	    command="$command \"$escaped\"";;
-    esac
-done
-
-sh -c "$command"
-
-if [ "$directory" = "1" ]; then
-    if [ ! -s "$out" ] && [ -s "$out"".1" ]; then
-        cat "$out"".1" > "$out"
-        rm "$out"".1"
-    else
-        rm "$out"".1"
+    # MODO DIRECTORIO
+    # Usamos --cwd-file para que Yazi escriba el directorio actual al salir.
+    cwd_temp="$out.cwd"
+    $TERM_CMD $YAZI_CMD --chooser-file="$out" --cwd-file="$cwd_temp" "$path"
+    
+    # Si existe el archivo cwd (directorio), sobrescribimos la salida con él
+    # Esto corrige el problema de seleccionar carpetas en Yazi
+    if [ -f "$cwd_temp" ] && [ -s "$cwd_temp" ]; then
+        mv "$cwd_temp" "$out"
+    elif [ -f "$out" ]; then
+        # Fallback: si el usuario seleccionó una carpeta con espacio/enter en lugar de entrar
+        # A veces Yazi escribe la carpeta seleccionada en chooser-file
+        : 
     fi
+    # Limpieza
+    rm -f "$cwd_temp"
+
+elif [ "$multiple" = "1" ]; then
+    # MODO MÚLTIPLE
+    $TERM_CMD $YAZI_CMD --chooser-file="$out" "$path"
+
+else
+    # MODO ARCHIVO ÚNICO (Abrir)
+    $TERM_CMD $YAZI_CMD --chooser-file="$out" "$path"
 fi

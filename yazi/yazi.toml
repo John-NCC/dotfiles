@@ -1,101 +1,91 @@
-# -------------------------
-# Yazi File Manager Config
-# -------------------------
-[mgr]
-# Panel size ratio (left, middle, right)
-ratio = [1, 2, 3]
+# -----------------------------------------------------------------------------
+# Configuración Principal de Yazi
+# -----------------------------------------------------------------------------
 
-# Sort using natural order (e.g., file10 after file2)
-sort_by = "natural"
-
-# Apply transliteration to sort non-ASCII names properly
-sort_translit = true
-
-# Show file size in the list view
-linemode = "size"
-
-# Number of lines to keep above/below the cursor when scrolling
-# Note: 200 is extremely high and may reduce usability
-scrolloff = 10
-
+[manager]
+# Diseño: [Padre, Actual, Previsualización]
+ratio          = [ 1, 3, 4 ]
+sort_by        = "natural"
+sort_sensitive = false
+sort_reverse   = false
+sort_dir_first = true
+linemode       = "size"
+show_hidden    = true
+show_symlink   = true
+scrolloff      = 5
 
 [preview]
-# Max width/height of previewed images (in pixels)
-# Keep these values reasonable to avoid performance issues
-max_width = 720
-max_height = 1280
+tab_size       = 2
+max_width      = 600
+max_height     = 900
+cache_dir      = ""
+image_filter   = "lanczos3"
+image_quality  = 90
+sixel_fraction = 15
 
+# -----------------------------------------------------------------------------
+# Abridores (Openers) - Define qué programas usar
+# -----------------------------------------------------------------------------
+[opener]
+edit = [
+    { run = 'nvim "$@"', block = true, desc = "Editar" },
+]
+play = [
+    { run = 'mpv "$@"', orphan = true, for = "unix", desc = "Reproducir" },
+]
+image = [
+    { run = 'imv "$@"', orphan = true, for = "unix", desc = "Ver Imagen" },
+]
+open = [
+    { run = 'xdg-open "$@"', desc = "Abrir (Sistema)", for = "linux" },
+]
 
+# -----------------------------------------------------------------------------
+# Reglas de Apertura - Asocia tipos de archivo a abridores
+# -----------------------------------------------------------------------------
+[open]
+rules = [
+    # Carpetas
+    { name = "*/", use = [ "edit", "open" ] },
+    
+    # Texto y Código
+    { mime = "text/*", use = [ "edit", "open" ] },
+    { mime = "application/json", use = [ "edit", "open" ] },
+    { mime = "*/javascript", use = [ "edit", "open" ] },
+    { mime = "inode/x-empty", use = [ "edit", "open" ] },
+    
+    # Multimedia
+    { mime = "image/*", use = [ "image", "open" ] },
+    { mime = "video/*", use = [ "play", "open" ] },
+    { mime = "audio/*", use = [ "play", "open" ] },
+    
+    # Fallback general
+    { name = "*", use = [ "open", "edit" ] },
+]
+
+# -----------------------------------------------------------------------------
+# Plugins (Previsualizadores y Fetchers)
+# -----------------------------------------------------------------------------
 [plugin]
-
-# -----------------------------------------------------------
-# Fetchers – Define how to fetch metadata or additional info
-# -----------------------------------------------------------
 fetchers = [
-  # Use MIME-based fetcher with high priority if MIME is not already present
-  { id = "mime", name = "*", run = "mime", if = "!mime", prio = "high" },
+    { id = "mime", name = "*", run = "mime", if = "!mime", prio = "high" },
 ]
 
-
-# -------------------------------------------------------
-# Preloaders – Run before previewers, useful for caching
-# -------------------------------------------------------
 preloaders = [
-  # Specialized image formats, handled by ImageMagick
-  { mime = "image/{avif,hei?,jxl,svg+xml}", run = "magick" },
-
-  # General image previewing
-  { mime = "image/*", run = "image" },
-
-  # Video thumbnails or metadata
-  { mime = "video/*", run = "video" },
-
-  # PDFs (can be slow — consider optional size check)
-  { mime = "application/pdf", run = "pdf" },
-
-  # Fonts
-  { mime = "font/*", run = "font" },
-  { mime = "application/vnd.ms-opentype", run = "font" },
+    { mime = "image/*", run = "image" },
+    { mime = "video/*", run = "video" },
+    { mime = "font/*", run = "font" },
 ]
 
-
-# -------------------------------------------
-# Previewers – Shown when a file is selected
-# -------------------------------------------
 previewers = [
-  # Directories
-  { name = "*/", run = "folder", sync = true },
-
-  # Text/code files
-  { mime = "text/*", run = "code" },
-  { mime = "*/{xml,javascript,x-wine-extension-ini}", run = "code" },
-
-  # JSON files
-  { mime = "application/{json,x-ndjson}", run = "json" },
-
-  # Specialized image formats
-  { mime = "image/{avif,hei?,jxl,svg+xml}", run = "magick" },
-
-  # All other images
-  { mime = "image/*", run = "image" },
-
-  # Video files
-  { mime = "video/*", run = "video" },
-
-  # PDF documents
-  { mime = "application/pdf", run = "pdf" },
-
-  # Archives (tarballs, 7z, ISO)
-  { mime = "application/{,g}zip", run = "archive" },
-  { mime = "application/x-{tar,bzip*,7z-compressed,xz,rar,iso9660-image}", run = "archive" },
-
-  # Fonts
-  { mime = "font/*", run = "font" },
-  { mime = "application/vnd.ms-opentype", run = "font" },
-
-  # Empty file handler
-  { mime = "inode/x-empty", run = "empty" },
-
-  # Fallback if nothing else matches
-  { name = "*", run = "file" },
+    { name = "*/", run = "folder", sync = true },
+    { mime = "text/*", run = "code" },
+    { mime = "*/xml", run = "code" },
+    { mime = "*/javascript", run = "code" },
+    { mime = "*/x-wine-extension-ini", run = "code" },
+    { mime = "application/json", run = "json" },
+    { mime = "image/*", run = "image" },
+    { mime = "video/*", run = "video" },
+    { mime = "font/*", run = "font" },
+    { name = "*", run = "file" },
 ]

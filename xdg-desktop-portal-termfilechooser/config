@@ -1,5 +1,11 @@
 [filechooser]
-cmd=yazi-wrapper.sh
-default_dir=$HOME/Downloads/
-open_mode = suggested
-save_mode = last
+# Ruta al script wrapper.
+# NOTA: Ajusta "/home/John" si tu usuario cambia.
+cmd=/home/John/.config/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
+
+# Carpeta por defecto
+default_dir=/home/John/Downloads/
+
+# Preferencias de visualización (soportado por algunas apps)
+open_mode=suggested
+save_mode=last

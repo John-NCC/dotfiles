@@ -1,141 +1,151 @@
-/* Apply common reset for all elements */
+/* -----------------------------------------------------------------------------
+   Estilos de Waybar - Tema Gruvbox Material Dark
+   ----------------------------------------------------------------------------- */
+
+/* Reset Global */
 * {
-  font-size: 13px; /* Base font size for consistency */
-  border: none; /* Remove any default border */
-  border-radius: 0; /* Remove border rounding */
-  font-family: my-queue; /* Custom font family; ensure it's installed */
-  padding: 0;
-  margin: 0;
+    border: none;
+    border-radius: 0;
+    font-family: "JetBrains Mono", "Symbols Nerd Font", sans-serif;
+    font-size: 13px;
+    font-weight: bold;
+    min-height: 0;
 }
 
-/* ----------------------
-   Main Waybar Container
-   ---------------------- */
-#waybar {
-  color: #d4be98; /* Primary text color */
-  background: rgba(50, 48, 47, 0.6); /* Semi-transparent background */
+/* Contenedor Principal */
+window#waybar {
+    background: rgba(40, 40, 40, 0.85); /* Fondo oscuro semitransparente */
+    color: #d4be98;
 }
 
-/* -------------------------
-   Workspaces Module Styles
-   ------------------------- */
+/* Espacios de Trabajo (Workspaces) */
+#workspaces {
+    background: #32302f; /* Fondo oscuro (Dark0_hard) */
+    margin: 0;
+    padding: 0;
+}
+
 #workspaces button {
-  color: #d4be98; /* Button text color */
-  background: #32302f; /* Button background */
-  border-left: 2px solid #46413e; /* Left border for separation */
+    padding: 0 10px;
+    color: #d4be98;
+    background: transparent;
+    /* Borde inferior sutil para separación */
+    border-bottom: 2px solid transparent; 
 }
-#workspaces button:first-child {
-  background: #32302f; /* First button: no left border */
-  border-left: 0;
+
+#workspaces button:hover {
+    background: #504945;
+    color: #d4be98;
 }
+
 #workspaces button.focused {
-  background: #3c3836; /* Focused workspace button */
-  box-shadow: inset 0 -3px #e78a4e; /* Underline effect for focus */
+    background: #3c3836;
+    color: #d4be98;
+    border-bottom: 2px solid #e78a4e; /* Naranja Gruvbox */
 }
+
 #workspaces button.urgent {
-  color: #32302f; /* Urgent state text color */
-  background: #ea6962; /* Urgent state background */
-}
-#workspaces button:hover,
-#workspaces button.focused:hover,
-#workspaces button.visible:hover {
-  color: #32302f; /* Hover state text color */
-  background: #d8a657; /* Hover state background */
+    background: #ea6962; /* Rojo */
+    color: #282828;
 }
 
-/* ---------------------------
-   Custom Arrows (Decorative)
-   --------------------------- */
-/* Arrow facing left with a light-on-bg style */
-#custom-arrow-light-on-bg-left {
-  font-size: 17px;
-  color: #3c3836;
-  background: transparent;
-}
-/* Arrow facing right with a light-on-bg style */
-#custom-arrow-light-on-bg-right {
-  font-size: 17px;
-  color: #3c3836;
-  background: transparent;
-}
-/* Arrows with a light-on-dark style */
-#custom-arrow-light-on-dark-left,
-#custom-arrow-light-on-dark-right {
-  font-size: 17px;
-  color: #3c3836;
-  background: #32302f;
-}
-/* Arrows with a dark-on-light style */
-#custom-arrow-dark-on-light-left,
-#custom-arrow-dark-on-light-right {
-  font-size: 17px;
-  color: #32302f;
-  background: #3c3836;
+/* Modo (Resize, etc) */
+#mode {
+    background: #ea6962;
+    color: #282828;
+    padding: 0 10px;
 }
 
-/* -----------------------------
-   Module Backgrounds & Padding
-   ----------------------------- */
-/* General background for specific modules */
+/* Reloj (Centro) */
+#clock {
+    padding: 0 10px;
+    background: transparent;
+    color: #d4be98;
+}
+
+/* -----------------------------------------------------------------------------
+   Módulos de la Derecha (Powerline)
+   ----------------------------------------------------------------------------- */
+
+/* Colores de Fondo para los Módulos */
+/* Alternamos entre Claro (#3c3836) y Oscuro (#32302f) */
+
+/* Fondo Claro */
+#pulseaudio,
+#cpu,
+#temperature,
+#battery,
+#custom-notification {
+    background: #3c3836;
+    color: #d4be98;
+    padding: 0 10px;
+}
+
+/* Fondo Oscuro */
 #network,
-#custom-net_speed,
 #memory,
 #backlight,
 #language,
-#tray,
-#custom-weather {
-  background: #32302f;
-  padding: 0 3; /* Horizontal padding: 3px (unit assumed) */
+#tray {
+    background: #32302f;
+    color: #d4be98;
+    padding: 0 10px;
 }
 
-/* Background settings for performance/monitoring modules */
-#cpu,
-#pulseaudio,
-#temperature,
-#battery,
-#custom-notification,
-#custom-crypto,
-#custom-updates {
-  background: #3c3836;
-  padding: 0 3;
-}
-
-/* ----------------------------------------
-   State Based Styles (Warning & Critical)
-   ---------------------------------------- */
-/* Warning state: moderate concern */
-#memory.warning,
-#cpu.warning,
+/* Estados Críticos y Advertencias */
 #battery.warning {
-  color: #d8a657;
+    color: #d8a657; /* Amarillo */
 }
-/* Critical state: immediate attention needed */
-#cpu.critical,
-#temperature.critical,
-#memory.critical,
-#battery.critical,
-#network.disconnected {
-  color: #ea6962;
+#battery.critical {
+    color: #ea6962; /* Rojo */
+}
+#temperature.critical {
+    color: #ea6962;
 }
 
-/* -----------------------------
-   Other Specific Module Styles
-   ----------------------------- */
-/* Mode indicator styling */
-#mode {
-  color: #32302f;
-  background: #ea6962;
+/* Bandeja de Sistema */
+#tray {
+    padding-right: 15px; /* Margen derecho extra */
 }
-/* Battery charging indicator */
-#battery.charging {
-  color: #a9b665;
+
+/* -----------------------------------------------------------------------------
+   Flechas Separadoras (Powerline Arrows)
+   ----------------------------------------------------------------------------- */
+
+/* Izquierda: Fondo Transparente -> Claro (#3c3836) */
+#custom-arrow-light-on-bg-left {
+    color: #3c3836;
+    background: transparent;
+    font-size: 20px;
+    margin-right: -1px; /* Arreglar gap visual */
 }
-/* Bluetooth audio devices styling */
-#pulseaudio.bluetooth {
-  color: #7daea3;
+
+/* Izquierda: Claro (#3c3836) -> Oscuro (#32302f) */
+#custom-arrow-dark-on-light-left {
+    color: #32302f;
+    background: #3c3836;
+    font-size: 20px;
+    margin-right: -1px;
 }
-/* Tooltip styling */
-#tooltip {
-  background: #32302f;
-  border: 1px solid #252423;
+
+/* Izquierda: Oscuro (#32302f) -> Claro (#3c3836) */
+#custom-arrow-light-on-dark-left {
+    color: #3c3836;
+    background: #32302f;
+    font-size: 20px;
+    margin-right: -1px;
+}
+
+/* Derecha (Para Workspaces): Oscuro -> Claro */
+#custom-arrow-dark-on-light-right {
+    color: #32302f; /* El color de fondo del workspace */
+    background: transparent;
+    font-size: 20px;
+    margin-left: -1px;
+}
+
+#custom-arrow-light-on-bg-right {
+    color: #ea6962; /* Color del modo si está activo, o ajustar según necesidad */
+    background: transparent;
+    font-size: 20px;
 }
