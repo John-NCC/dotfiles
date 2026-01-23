@@ -1,151 +1,195 @@
 /* -----------------------------------------------------------------------------
-   Estilos de Waybar - Tema Gruvbox Material Dark
+   Estilos de Waybar - Tema Gruvbox Material Professional
    ----------------------------------------------------------------------------- */
 
-/* Reset Global */
+/* --- Variables de Color (Gruvbox Material) --- */
+@define-color bg_dim #1d2021;
+@define-color bg0 #282828;
+@define-color bg1 #32302f;
+@define-color bg2 #3c3836;
+@define-color fg #d4be98;
+@define-color red #ea6962;
+@define-color orange #e78a4e;
+@define-color yellow #d8a657;
+@define-color green #a9b665;
+@define-color aqua #89b482;
+@define-color blue #7daea3;
+@define-color purple #d3869b;
+@define-color grey #7c6f64;
+
+/* --- Reset Global --- */
 * {
     border: none;
     border-radius: 0;
     font-family: "JetBrains Mono", "Symbols Nerd Font", sans-serif;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: bold;
     min-height: 0;
 }
 
-/* Contenedor Principal */
 window#waybar {
-    background: rgba(40, 40, 40, 0.85); /* Fondo oscuro semitransparente */
-    color: #d4be98;
+    background: transparent; /* Fondo transparente para efecto flotante */
+    color: @fg;
 }
 
-/* Espacios de Trabajo (Workspaces) */
+tooltip {
+    background: @bg0;
+    border-radius: 8px;
+    border: 1px solid @bg2;
+}
+
+tooltip label {
+    color: @fg;
+}
+
+/* --- Módulos Comunes --- */
+#workspaces,
+#mode,
+#window,
+#clock,
+#pulseaudio,
+#network,
+#cpu,
+#memory,
+#temperature,
+#battery,
+#tray,
+#custom-notification {
+    background-color: @bg0; /* Fondo oscuro unificado */
+    padding: 0px 10px;
+    margin: 4px 2px;       /* Separación entre píldoras */
+    border-radius: 6px;    /* Bordes redondeados sutiles */
+    border: 1px solid @bg1;
+    color: @fg;
+    box-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+/* --- Workspaces --- */
 #workspaces {
-    background: #32302f; /* Fondo oscuro (Dark0_hard) */
-    margin: 0;
-    padding: 0;
+    padding: 0 4px;
 }
 
 #workspaces button {
-    padding: 0 10px;
-    color: #d4be98;
+    padding: 0 6px;
+    color: @grey;
     background: transparent;
-    /* Borde inferior sutil para separación */
-    border-bottom: 2px solid transparent; 
+    border-radius: 4px;
+    margin: 4px 0;
+    transition: all 0.3s ease;
 }
 
 #workspaces button:hover {
-    background: #504945;
-    color: #d4be98;
+    color: @fg;
+    background: @bg2;
+    box-shadow: none;
 }
 
 #workspaces button.focused {
-    background: #3c3836;
-    color: #d4be98;
-    border-bottom: 2px solid #e78a4e; /* Naranja Gruvbox */
+    color: @bg0;
+    background: @orange; /* Resalte naranja Gruvbox */
+    min-width: 20px;
 }
 
 #workspaces button.urgent {
-    background: #ea6962; /* Rojo */
-    color: #282828;
+    color: @bg0;
+    background: @red;
 }
 
-/* Modo (Resize, etc) */
-#mode {
-    background: #ea6962;
-    color: #282828;
-    padding: 0 10px;
-}
-
-/* Reloj (Centro) */
-#clock {
-    padding: 0 10px;
+/* --- Window Title (Opcional si lo usas) --- */
+#window {
     background: transparent;
-    color: #d4be98;
+    border: none;
+    box-shadow: none;
+    color: @grey;
 }
 
-/* -----------------------------------------------------------------------------
-   Módulos de la Derecha (Powerline)
-   ----------------------------------------------------------------------------- */
-
-/* Colores de Fondo para los Módulos */
-/* Alternamos entre Claro (#3c3836) y Oscuro (#32302f) */
-
-/* Fondo Claro */
-#pulseaudio,
-#cpu,
-#temperature,
-#battery,
-#custom-notification {
-    background: #3c3836;
-    color: #d4be98;
-    padding: 0 10px;
+/* --- Clock --- */
+#clock {
+    color: @blue;
+    font-weight: 800;
+    background: @bg1; /* Un poco más claro para destacar el centro */
 }
 
-/* Fondo Oscuro */
-#network,
-#memory,
-#backlight,
-#language,
-#tray {
-    background: #32302f;
-    color: #d4be98;
-    padding: 0 10px;
+/* --- Módulos Derecha (Coloreado Sutil) --- */
+
+/* Audio */
+#pulseaudio {
+    color: @aqua;
+}
+#pulseaudio.muted {
+    color: @red;
 }
 
-/* Estados Críticos y Advertencias */
-#battery.warning {
-    color: #d8a657; /* Amarillo */
+/* Network */
+#network {
+    color: @purple;
 }
-#battery.critical {
-    color: #ea6962; /* Rojo */
+#network.disconnected {
+    color: @red;
+}
+
+/* Hardware Info */
+#cpu {
+    color: @green;
+}
+#memory {
+    color: @blue;
+}
+#temperature {
+    color: @orange;
 }
 #temperature.critical {
-    color: #ea6962;
+    color: @red;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
-/* Bandeja de Sistema */
+/* Battery */
+#battery {
+    color: @fg;
+}
+#battery.charging {
+    color: @green;
+}
+#battery.warning {
+    color: @yellow;
+}
+#battery.critical {
+    color: @red;
+}
+
+/* Tray */
 #tray {
-    padding-right: 15px; /* Margen derecho extra */
+    padding-right: 12px;
+}
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: @red;
 }
 
-/* -----------------------------------------------------------------------------
-   Flechas Separadoras (Powerline Arrows)
-   ----------------------------------------------------------------------------- */
-
-/* Izquierda: Fondo Transparente -> Claro (#3c3836) */
-#custom-arrow-light-on-bg-left {
-    color: #3c3836;
-    background: transparent;
-    font-size: 20px;
-    margin-right: -1px; /* Arreglar gap visual */
+/* Notification */
+#custom-notification {
+    padding-right: 14px;
+    padding-left: 14px;
+    color: @yellow;
 }
 
-/* Izquierda: Claro (#3c3836) -> Oscuro (#32302f) */
-#custom-arrow-dark-on-light-left {
-    color: #32302f;
-    background: #3c3836;
-    font-size: 20px;
-    margin-right: -1px;
+/* --- Modo (Resize, etc) --- */
+#mode {
+    background: @red;
+    color: @bg0;
 }
 
-/* Izquierda: Oscuro (#32302f) -> Claro (#3c3836) */
-#custom-arrow-light-on-dark-left {
-    color: #3c3836;
-    background: #32302f;
-    font-size: 20px;
-    margin-right: -1px;
-}
-
-/* Derecha (Para Workspaces): Oscuro -> Claro */
-#custom-arrow-dark-on-light-right {
-    color: #32302f; /* El color de fondo del workspace */
-    background: transparent;
-    font-size: 20px;
-    margin-left: -1px;
-}
-
-#custom-arrow-light-on-bg-right {
-    color: #ea6962; /* Color del modo si está activo, o ajustar según necesidad */
-    background: transparent;
-    font-size: 20px;
+/* --- Animaciones --- */
+@keyframes blink {
+    to {
+        color: @bg0;
+        background-color: @red;
+    }
 }

@@ -1,163 +1,174 @@
-/* -------------------------------------------------------------------------
-   Configuración de Rofi - Tema Gruvbox Dark
-   ------------------------------------------------------------------------- */
+/* ==========================================================================
+   Rofi "Obsidian Void" - Pure Professional
+   Estilo negro absoluto, sin distracciones, alto rendimiento visual.
+   ========================================================================== */
 
 configuration {
-    /* --- Comportamiento --- */
-    modi:                       "drun,run,filebrowser,calc,window";
+    modi:                       "drun,run,filebrowser,window,calc";
     show-icons:                 true;
-    display-drun:               "  Apps";
-    display-run:                "  Run";
-    display-filebrowser:        "  Files";
-    display-window:             "  Window";
-    display-calc:               "  Calc";
+    display-drun:               "";
+    display-run:                "";
+    display-filebrowser:        "";
+    display-window:             "";
+    display-calc:               "";
     drun-display-format:        "{name}";
     window-format:              "{w} · {c} · {t}";
-    
-    /* --- Interacción --- */
     case-sensitive:             false;
     cycle:                      true;
-    scroll-method:              1;
+    scroll-method:              0;
     normalize-match:            true;
     no-lazy-grab:               true;
-    
-    /* --- Terminal --- */
     terminal:                   "kitty";
 }
 
-/* -------------------------------------------------------------------------
-   Estilos y Colores
-   ------------------------------------------------------------------------- */
-
 * {
-    /* Paleta Gruvbox Dark Hard */
-    bg-col:  #1d2021;
-    bg-col-light: #282828;
-    border-col: #282828;
-    selected-col: #282828;
-    blue: #7daea3;
-    fg-col: #d4be98;
-    fg-col2: #d8a657;
-    grey: #928374;
+    /* Paleta "Void" (Negro Absoluto) */
+    bg-base:      #000000;  /* Negro puro */
+    bg-selected:  #1a1a1a;  /* Gris muy oscuro para selección */
+    
+    fg-text:      #c0c0c0;  /* Plata suave para lectura */
+    fg-dim:       #444444;  /* Gris oscuro para inactivos */
+    fg-accent:    #ffffff;  /* Blanco puro para selección */
+    
+    border-col:   #222222;  /* Bordes apenas perceptibles */
+    
+    /* Globales */
+    background-color: transparent;
+    text-color:       @fg-text;
+    
+    /* Tipografía técnica */
+    font: "JetBrains Mono Medium 11"; 
 
-    /* Propiedades Globales */
-    background-color: @bg-col;
-    text-color: @fg-col;
-    /* CORRECCIÓN: Rofi usa 'font', no 'font-family'. Incluye el tamaño. */
-    font: "JetBrains Mono 12";
-}
-
-/* -------------------------------------------------------------------------
-   Estructura de la Ventana
-   ------------------------------------------------------------------------- */
-
-window {
-    height: 500px;
-    width: 600px;
-    border: 2px;
-    border-color: @border-col;
-    background-color: @bg-col;
-    border-radius: 10px;
-}
-
-mainbox {
-    background-color: @bg-col;
-    padding: 10px;
-    children: [inputbar, listview]; 
-    /* inputbar arriba, lista abajo */
-}
-
-/* -------------------------------------------------------------------------
-   Barra de Búsqueda (Input)
-   ------------------------------------------------------------------------- */
-
-inputbar {
-    children: [prompt, entry];
-    background-color: @bg-col;
-    border-radius: 5px;
-    padding: 2px;
-    margin: 0px 0px 10px 0px; 
-}
-
-prompt {
-    background-color: @blue;
-    padding: 6px;
-    text-color: @bg-col;
-    border-radius: 3px;
-    margin: 20px 0px 0px 20px;
-}
-
-textbox-prompt-colon {
-    expand: false;
-    str: ":";
-}
-
-entry {
-    padding: 6px;
-    margin: 20px 0px 0px 10px;
-    text-color: @fg-col;
-    background-color: @bg-col;
-    placeholder: "Buscar...";
-    placeholder-color: @grey;
-}
-
-/* -------------------------------------------------------------------------
-   Lista de Elementos
-   ------------------------------------------------------------------------- */
-
-listview {
-    border: 0px 0px 0px;
-    padding: 6px 0px 0px;
-    margin: 10px 0px 0px 20px;
-    columns: 1;
-    lines: 8; /* Número de líneas visibles */
-    background-color: @bg-col;
-    spacing: 5px; /* Espacio entre elementos */
-}
-
-element {
-    padding: 8px;
-    background-color: @bg-col;
-    text-color: @fg-col;
-    border-radius: 5px;
-    orientation: horizontal;
-    spacing: 10px; /* Espacio entre icono y texto */
-}
-
-element-icon {
-    size: 24px; /* Tamaño correcto para los iconos */
-    horizontal-align: 0.5;
-    background-color: inherit; /* Heredar color del elemento padre */
-}
-
-element-text {
-    vertical-align: 0.5;
-    background-color: inherit;
-    text-color: inherit;
-}
-
-/* Estado Seleccionado */
-element selected {
-    background-color:  @bg-col-light;
-    text-color: @fg-col2;
-    border: 1px;
-    border-color: @border-col;
-}
-
-/* Opcional: Modo Sidebar (si usas tabs) */
-mode-switcher {
+    margin:  0;
+    padding: 0;
     spacing: 0;
 }
 
+window {
+    location:       center;
+    width:          600px;
+    height:         400px;
+    
+    background-color: @bg-base;
+    border:           1px;
+    border-color:     @border-col;
+    border-radius:    0px; 
+    box-shadow:       0px 0px 0px 0px; /* Sin sombra para look plano/técnico */
+}
+
+mainbox {
+    padding: 0;
+    children: [ inputbar, listview, mode-switcher ];
+}
+
+/* --- Input --- */
+inputbar {
+    background-color: @bg-base;
+    padding:          12px;
+    border:           0px 0px 1px 0px;
+    border-color:     @border-col;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    text-color:       @fg-accent;
+    padding:          0 12px 0 0;
+    font:             "JetBrains Mono Bold 11";
+}
+
+entry {
+    text-color:       @fg-text;
+    placeholder:      "Type to search...";
+    placeholder-color: @fg-dim;
+    cursor:           text;
+}
+
+/* --- Lista --- */
+listview {
+    padding:      0px;
+    columns:      1;
+    lines:        10;
+    spacing:      0px;
+    scrollbar:    false; /* Ocultar scrollbar para minimalismo total */
+    layout:       vertical;
+}
+
+element {
+    padding:      8px 12px;
+    border-radius: 0px;
+    orientation:  horizontal;
+    spacing:      12px;
+    cursor:       pointer;
+}
+
+element normal.normal {
+    background-color: @bg-base;
+    text-color:       @fg-dim;
+}
+
+element alternate.normal {
+    background-color: @bg-base;
+    text-color:       @fg-dim;
+}
+
+element selected.normal {
+    background-color: @bg-selected;
+    text-color:       @fg-accent;
+    border:           0px 0px 0px 2px;
+    border-color:     @fg-accent;
+}
+
+element-icon {
+    size:             20px;
+    cursor:           inherit;
+    text-color:       inherit;
+    /* Hacer los iconos inactivos más oscuros/transparentes */
+    opacity:          0.5; 
+}
+
+element selected.normal element-icon {
+    opacity:          1.0;
+}
+
+element-text {
+    vertical-align:   0.5;
+    cursor:           inherit;
+    background-color: transparent;
+    text-color:       inherit;
+    highlight:        None; /* Sin resaltado de color para mantener la sobriedad */
+}
+
+element selected.normal element-text {
+    highlight:        bold underline;
+}
+
+/* --- Mode Switcher (Bottom) --- */
+mode-switcher {
+    padding:      0px;
+    background-color: @bg-base;
+    border:       1px 0px 0px 0px;
+    border-color: @border-col;
+}
+
 button {
-    padding: 10px;
-    background-color: @bg-col-light;
-    text-color: @grey;
-    vertical-align: 0.5; 
-    horizontal-align: 0.5;
+    padding:          10px;
+    background-color: @bg-base;
+    text-color:       @fg-dim;
+    cursor:           pointer;
+    font:             "JetBrains Mono Bold 10";
 }
 
 button selected {
-    background-color: @bg-col;
-    text-color: @blue;
+    background-color: @bg-selected;
+    text-color:       @fg-accent;
+}
+
+/* --- Mensajes --- */
+message {
+    padding:      12px;
+    background-color: @bg-base;
+}
+
+textbox {
+    text-color: @fg-accent;
 }

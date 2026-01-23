@@ -1,181 +1,159 @@
 {
-  "layer": "top",
-  "position": "top",
-  "height": 30,
-  "spacing": 0,
-  
-  "modules-left": [
-    "sway/workspaces",
-    "custom/arrow-dark-on-light-right",
-    "sway/mode",
-    "custom/arrow-light-on-bg-right"
-  ],
-  
-  "modules-center": [
-    "clock"
-  ],
-  
-  "modules-right": [
-    "custom/arrow-light-on-bg-left",
-    "pulseaudio",
-    "custom/arrow-dark-on-light-left",
-    "network",
-    "custom/arrow-light-on-dark-left",
-    "cpu",
-    "custom/arrow-dark-on-light-left",
-    "memory",
-    "custom/arrow-light-on-dark-left",
-    "temperature",
-    "custom/arrow-dark-on-light-left",
-    "backlight",
-    "custom/arrow-light-on-dark-left",
-    "battery",
-    "custom/arrow-dark-on-light-left",
-    "sway/language",
-    "custom/arrow-light-on-dark-left",
-    "custom/notification",
-    "custom/arrow-dark-on-light-left",
-    "tray"
-  ],
+    "layer": "top",
+    "position": "top",
+    "height": 34, // Un poco más alto para permitir márgenes
+    "spacing": 5, // Espacio entre módulos
+    "margin-top": 2,
+    "margin-bottom": 2,
+    "margin-left": 6,
+    "margin-right": 6,
 
-  // --- Módulos Principales ---
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode",
+        "sway/window"
+    ],
 
-  "sway/workspaces": {
-    "disable-scroll": true,
-    "all-outputs": true,
-    "format": "{name}"
-  },
+    "modules-center": [
+        "clock"
+    ],
 
-  "sway/mode": {
-    "format": "<span style=\"italic\">{}</span>"
-  },
+    "modules-right": [
+        "pulseaudio",
+        "network",
+        "cpu",
+        "memory",
+        "temperature",
+        "battery",
+        "tray",
+        "custom/notification"
+    ],
 
-  "clock": {
-    "format": "  {:%H:%M}",
-    "format-alt": "  {:%A, %d %b %Y}",
-    "tooltip-format": "<tt><small>{calendar}</small></tt>",
-    "calendar": {
-      "mode": "month",
-      "format": {
-        "months": "<span color='#d4be98'><b>{}</b></span>",
-        "days": "<span color='#d4be98'><b>{}</b></span>",
-        "weeks": "<span color='#a9b665'><b>W{}</b></span>",
-        "weekdays": "<span color='#d8a657'><b>{}</b></span>",
-        "today": "<span color='#e78a4e'><b><u>{}</u></b></span>"
-      }
+    // --- Configuración de Módulos ---
+
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "format": "{name}" // O puedes usar iconos: "format": "{icon}", "format-icons": {...}
+    },
+
+    "sway/mode": {
+        "format": "<span>{}</span>"
+    },
+
+    "sway/window": {
+        "format": "{title}",
+        "max-length": 50,
+        "rewrite": {
+            "(.*) - Mozilla Firefox": "🌎 $1",
+            "(.*) - Visual Studio Code": "code $1",
+            "(.*) - Terminal": ">_ $1"
+        }
+    },
+
+    "clock": {
+        "format": "{:%H:%M:%S}",
+        "interval": 1,
+        "format-alt": "{:%A, %d %b %Y}",
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode"          : "year",
+            "mode-mon-col"  : 3,
+            "weeks-pos"     : "right",
+            "on-scroll"     : 1,
+            "format": {
+                "months":     "<span color='#d4be98'><b>{}</b></span>",
+                "days":       "<span color='#d4be98'><b>{}</b></span>",
+                "weeks":      "<span color='#a9b665'><b>W{}</b></span>",
+                "weekdays":   "<span color='#d8a657'><b>{}</b></span>",
+                "today":      "<span color='#e78a4e'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions":  {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+
+    "network": {
+        "format-wifi": "  {essid}",
+        "format-ethernet": "󰈀 Wired",
+        "format-linked": "󰈀 {ifname} (No IP)",
+        "format-disconnected": "⚠",
+        "format-alt": "{ifname}: {ipaddr}/{cidr}",
+        "tooltip-format": "{ifname} via {gwaddr}"
+    },
+
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": true,
+        "on-click": "kitty -e btop"
+    },
+
+    "memory": {
+        "format": " {}%"
+    },
+
+    "temperature": {
+        "critical-threshold": 80,
+        "format": "{icon} {temperatureC}°C",
+        "format-icons": ["", "", ""]
+    },
+
+    "battery": {
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    },
+
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span foreground='#ea6962'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='#ea6962'><sup></sup></span>",
+            "dnd-none": "",
+            "inhibited-notification": "<span foreground='#ea6962'><sup></sup></span>",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "<span foreground='#ea6962'><sup></sup></span>",
+            "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     }
-  },
-
-  "pulseaudio": {
-    "scroll-step": 5,
-    "format": "{icon} {volume}%",
-    "format-bluetooth": "{icon} {volume}%",
-    "format-muted": " Muted",
-    "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["", ""]
-    },
-    "on-click": "pavucontrol"
-  },
-
-  "network": {
-    "format-wifi": "  {essid}",
-    "format-ethernet": "󰈀  Connected",
-    "format-linked": "󰈀  {ifname} (No IP)",
-    "format-disconnected": "⚠ Disconnected",
-    "format-alt": "{ifname}: {ipaddr}/{cidr}",
-    "tooltip-format": "{ifname} via {gwaddr}"
-  },
-
-  "cpu": {
-    "format": "  {usage}%",
-    "tooltip": false,
-    "on-click": "kitty -e btop"
-  },
-
-  "memory": {
-    "format": "  {}%"
-  },
-
-  "temperature": {
-    "critical-threshold": 80,
-    "format": "{icon} {temperatureC}°C",
-    "format-icons": ["", "", ""]
-  },
-
-  "backlight": {
-    "format": "{icon} {percent}%",
-    "format-icons": ["", "", "", "", "", "", "", "", ""]
-  },
-
-  "battery": {
-    "states": {
-      "warning": 30,
-      "critical": 15
-    },
-    "format": "{icon} {capacity}%",
-    "format-charging": "󰂄 {capacity}%",
-    "format-plugged": " {capacity}%",
-    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
-  },
-
-  "sway/language": {
-    "format": "  {}",
-    "min-length": 5,
-    "tooltip": false
-  },
-
-  "tray": {
-    "icon-size": 18,
-    "spacing": 10
-  },
-
-  "custom/notification": {
-    "tooltip": false,
-    "format": "{icon}",
-    "format-icons": {
-      "notification": "<span foreground='#ea6962'><sup></sup></span>",
-      "none": "",
-      "dnd-notification": "<span foreground='#ea6962'><sup></sup></span>",
-      "dnd-none": "",
-      "inhibited-notification": "<span foreground='#ea6962'><sup></sup></span>",
-      "inhibited-none": "",
-      "dnd-inhibited-notification": "<span foreground='#ea6962'><sup></sup></span>",
-      "dnd-inhibited-none": ""
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
-  },
-
-  // --- Flechas Separadoras (Powerline Style) ---
-
-  "custom/arrow-light-on-bg-left": {
-    "format": "",
-    "tooltip": false
-  },
-  "custom/arrow-dark-on-light-left": {
-    "format": "",
-    "tooltip": false
-  },
-  "custom/arrow-light-on-dark-left": {
-    "format": "",
-    "tooltip": false
-  },
-  "custom/arrow-light-on-bg-right": {
-    "format": "",
-    "tooltip": false
-  },
-  "custom/arrow-dark-on-light-right": {
-    "format": "",
-    "tooltip": false
-  }
 }

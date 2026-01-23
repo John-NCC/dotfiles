@@ -1,43 +1,42 @@
-/* ====================================
-   Volume & Backlight Slider Overrides
-   ==================================== */
+/* ----------------
+   Sliders Slim
+   ---------------- */
 
-:root {
-  --slider-bg: rgb(60, 56, 54);
-  --slider-fill: rgb(212, 190, 152); /* FG color */
-  --slider-fill-hover: rgb(231, 138, 78); /* Orange */
+.widget-volume,
+.widget-backlight {
+    background-color: var(--cc-bg);
+    padding: 6px 8px;
+    border-bottom: 1px solid var(--cc-border);
+    margin: 0;
 }
 
-/* Label Icon */
+/* Iconos Izquierda */
 .widget-volume > box > label,
 .widget-backlight > box > label {
-  font-size: 1.5rem;
-  color: var(--text-color);
-  margin-right: 12px;
+  font-size: 12px;
+  color: var(--text-main);
+  margin-right: 8px;
+  min-width: 20px;
 }
 
-/* Slider Track (Background) */
+/* Fondo Barra */
 .widget-volume scale trough,
 .widget-backlight scale trough {
-  background-color: var(--slider-bg);
-  border-radius: 12px;
-  min-height: 8px;
+  background-color: #333333;
+  border-radius: 2px;
+  min-height: 4px; /* Barra muy fina */
+  margin-top: 6px; /* Centrado vertical visual */
+  margin-bottom: 6px;
 }
 
-/* Slider Highlight (Filled part) */
+/* Relleno Barra */
 .widget-volume scale trough highlight,
 .widget-backlight scale trough highlight {
-  background-color: var(--slider-fill);
-  border-radius: 12px;
-  transition: background-color 0.2s ease;
+  background-color: var(--accent); /* Color acento */
+  border-radius: 2px;
 }
 
-.widget-volume:hover scale trough highlight,
-.widget-backlight:hover scale trough highlight {
-  background-color: var(--slider-fill-hover);
-}
-
-/* Slider Handle (Knob) - Hidden for cleaner look, or style it */
+/* Slider Handle (Invisible para look limpio) */
 .widget-volume scale slider,
 .widget-backlight scale slider {
   background-color: transparent;

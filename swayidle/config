@@ -1,15 +1,13 @@
 #!/bin/sh
+# Script para manejar apagado de pantalla y bloqueo en Sway
 
-# NOTA: Este archivo es un script. Asegúrate de hacerlo ejecutable (chmod +x).
-# Se ejecuta desde Sway para gestionar el apagado de pantalla y bloqueo.
+# Asegúrate de hacerlo ejecutable:
+# chmod +x ~/.config/sway/swayidle.sh
 
-exec swayidle -w \
-    \
+swayidle -w \
     timeout 900 'swaylock -f' \
-    \
     timeout 1200 'swaymsg "output * dpms off"' \
-        resume 'swaymsg "output * dpms on"' \
-    \
+    resume 'swaymsg "output * dpms on"' \
     timeout 1800 'systemctl suspend' \
-    \
     before-sleep 'swaylock -f'
+

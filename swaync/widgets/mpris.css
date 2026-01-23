@@ -1,61 +1,54 @@
-/* ------------------------
-   Container & Player Card
-   ------------------------ */
+/* ----------------
+   MPRIS Mini Player
+   ---------------- */
+
 .widget-mpris {
-  padding: 8px;
+  padding: 4px;
+  background-color: var(--cc-bg);
+  border-bottom: 1px solid var(--cc-border);
 }
 
 .widget-mpris .widget-mpris-player {
-  background-color: var(--noti-bg-darker);
-  border: 1px solid var(--noti-border-color);
-  border-radius: 12px;
-  padding: 8px;
-  margin-bottom: 8px;
+  background-color: var(--noti-bg);
+  border: 1px solid var(--cc-border);
+  border-radius: 4px;
+  padding: 6px;
+  margin: 0;
 }
 
-/* -------------------------
-   Blurred Background Layer
-   ------------------------- */
-/* Ocultamos el blur por defecto para usar un fondo sólido limpio */
+/* Fondo de carátula borroso (desactivado para limpieza, o muy sutil) */
 .widget-mpris .widget-mpris-player .mpris-background {
-  background-color: var(--noti-bg-darker);
-  border-radius: 12px;
+  background-color: var(--noti-bg);
+  border-radius: 4px;
 }
 
-/* -------------------
-   Overlay & Controls
-   ------------------- */
 .widget-mpris .widget-mpris-player .mpris-overlay {
-  background-color: rgba(40, 40, 40, 0.8);
-  border-radius: 12px;
-  padding: 12px;
+  background-color: transparent;
+  padding: 0;
 }
 
+/* Botones */
 .widget-mpris .widget-mpris-player .mpris-overlay button {
-  border-radius: 100%;
-  margin: 0 4px;
+  border-radius: 4px;
+  color: var(--text-main);
+  border: 1px solid transparent;
+  padding: 2px;
+  margin: 0 2px;
 }
 
 .widget-mpris .widget-mpris-player .mpris-overlay button:hover {
   background-color: var(--noti-bg-hover);
+  border-color: var(--cc-border);
 }
 
-/* -----------------
-   Album Art & Text
-   ----------------- */
-.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-album-art {
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-  margin-right: 12px;
-}
-
+/* Texto */
 .widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-title {
-  font-weight: bold;
-  font-size: 1.1rem;
-  color: var(--text-color);
+  font-size: 11px;
+  font-weight: 700;
+  color: #ffffff;
 }
 
 .widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-subtitle {
-  font-size: 0.9rem;
-  color: var(--text-color-disabled);
+  font-size: 10px;
+  color: var(--text-dim);
 }
