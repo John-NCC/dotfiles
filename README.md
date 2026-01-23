@@ -1,93 +1,51 @@
 # 🐧 Dotfiles de John-NCC
 
-Bienvenido a la documentación oficial de mi entorno de trabajo personalizado. Este repositorio transforma una instalación base de Arch Linux en un sistema Wayland profesional, estético y altamente productivo, utilizando **Sway WM** como núcleo.
+Bienvenido a mi configuración personal para Arch Linux. Este repositorio despliega un entorno de trabajo Wayland basado en Sway WM, diseñado para la productividad, el minimalismo y la estética coherente.
 
-Todo el sistema ha sido diseñado bajo la filosofía **"Pixel Perfect"** y la paleta de colores **Gruvbox Material Dark (Hard)**.
+Todo el sistema sigue estrictamente la paleta de colores **Gruvbox Material Dark** y utiliza tipografías optimizadas para el desarrollo de software.
 
----
+## 🎨 Características Principales
 
-## 🎨 Filosofía de Diseño
-
-Este entorno no es una mezcla aleatoria de configuraciones; es un ecosistema integrado donde cada herramienta respeta las siguientes reglas:
-
-- **Coherencia Visual:** Todo (desde el editor de texto hasta el selector de archivos) usa el tema Gruvbox Material Dark.
-
-- **Tipografía Unificada:**
-  - **Código/Terminal:** JetBrains Mono Nerd Font (Ligaduras activadas, tamaño legible).
-  - **Interfaz (UI):** Cantarell (Limpia y moderna para barras y menús).
-
-- **Minimalismo Funcional:** Se han eliminado herramientas redundantes (como neofetch o wob) en favor de alternativas modernas y rápidas (fastfetch, swayosd).
-
-- **Modularidad:** Las configuraciones de Sway y Neovim están divididas en múltiples archivos para facilitar el mantenimiento.
-
----
+* **Entorno:** Sway WM con bordes *pixel-perfect* y gestión inteligente de ventanas.
+* **Panel HUD:** Waybar y SwayNC configurados con un diseño compacto y profesional ("Obsidian Style").
+* **Terminal:** Kitty con soporte gráfico nativo y renderizado por GPU.
+* **Editor:** Neovim ultra-vitaminado (Lazy, Mason, Treesitter) listo para programar.
+* **Gestión de Archivos:** Flujo de trabajo basado en terminal con Yazi e integración en diálogos del sistema.
 
 ## 🛠️ Stack Tecnológico
 
-Estas son las herramientas que componen el sistema:
+| Categoría | Herramienta | Función |
+| :--- | :--- | :--- |
+| **Window Manager** | Sway | Compositor principal. |
+| **Barra** | Waybar | Información del sistema y workspaces. |
+| **Notificaciones** | SwayNC | Centro de control y notificaciones. |
+| **Lanzador** | Rofi (Wayland) | Menú de apps, ventanas y calculadora. |
+| **OSD** | SwayOSD | Indicadores de volumen y brillo en pantalla. |
+| **Terminal** | Kitty | Emulador de terminal. |
+| **Editor** | Neovim | IDE basado en terminal. |
+| **Archivos** | Yazi | Gestor de archivos rápido escrito en Rust. |
+| **Info Sistema** | Fastfetch | Resumen de hardware y software. |
+| **Git** | Lazygit | Interfaz de terminal para Git. |
 
-### 🖥️ Entorno de Escritorio (Window Manager)
+## 🚀 Guía de Instalación
 
-| Herramienta | Función | Configuración Destacada |
-|------------|--------|------------------------|
-| **Sway** | Compositor | Configuración modular (`config.d/`), reglas para ventanas flotantes y gestión de energía inteligente con `swayidle`. |
-| **Waybar** | Barra de Estado | Diseño estilo Powerline (flechas separadoras), módulos interactivos (clic derecho/izquierdo) y CSS personalizado. |
-| **SwayNC** | Notificaciones | Centro de notificaciones lateral con historial, modo "No Molestar" y controles multimedia. Reemplaza a `mako`. |
-| **Rofi (Wayland)** | Lanzador | Fork compatible con Wayland. Tema personalizado Gruvbox con iconos grandes y modo lista lateral. |
-| **SwayOSD** | OSD | Muestra indicadores elegantes de volumen, brillo y Bloq Mayús en pantalla. Reemplaza al obsoleto `wob`. |
-| **Sworkstyle** | Workspaces | Renombra automáticamente los espacios de trabajo con iconos (ej: 1: ) según la aplicación abierta. |
-| **Kanshi** | Pantallas | Detecta automáticamente si estás en modo Laptop o Monitor Externo y ajusta la resolución y posición. |
+Sigue estos pasos para replicar este entorno en una instalación limpia de Arch Linux.
 
----
-
-### 🚀 Terminal y CLI
-
-| Herramienta | Función | Configuración Destacada |
-|------------|--------|------------------------|
-| **Kitty** | Terminal | Renderizado por GPU, soporte nativo de imágenes, atajos de pestañas y tema Gruvbox integrado. |
-| **Neovim** | Editor | Configuración profesional en Lua con `Lazy.nvim`, `Mason` (LSP automático), `Treesitter` (resaltado) y `LazyDev`. |
-| **Yazi** | Gestor de Archivos | Navegación ultrarrápida, previsualización de imágenes/videos y script wrapper para usarlo como selector de archivos del sistema. |
-| **Fastfetch** | Info del Sistema | Reemplazo moderno de `Neofetch`. Configurado con un diseño de "caja" (Box Art) personalizado. |
-| **Bat** | Visor de Texto | Reemplazo de `cat` con resaltado de sintaxis, paginación automática e integración con Git. |
-| **Lazygit** | Cliente Git | Interfaz TUI completa para Git. Integración con `Commitizen` para mensajes de commit estandarizados. |
-| **Btop** | Monitor | Monitor de recursos del sistema con tema visual completo. |
-
----
-
-### 🎵 Multimedia y Utilidades
-
-| Herramienta | Función | Configuración Destacada |
-|------------|--------|------------------------|
-| **PipeWire** | Motor de Audio | Configuración personalizada de baja latencia y cambio automático de frecuencia de muestreo (44.1k/48k). |
-| **Pulsemixer** | Mezclador | Interfaz visual en terminal para controlar volúmenes por aplicación individualmente. |
-| **MPV + ModernZ** | Video | Reproductor ligero con interfaz OSC moderna, aceleración por hardware y shaders de alta calidad. |
-| **IMV** | Imágenes | Visor minimalista optimizado para Wayland, con atajos tipo Vim. |
-| **Zathura** | PDF | Modo "recolor" automático para invertir colores de documentos blancos a oscuros (Gruvbox). |
-| **Udiskie** | Montaje USB | Automontaje de dispositivos externos sin necesidad de root, con notificaciones en bandeja. |
-| **Grimshot + Swappy** | Capturas | Flujo de trabajo rápido: Capturar área -> Editar/Anotar en Swappy -> Guardar. |
-
----
-
-## 📥 Guía de Instalación Paso a Paso
-
-### 1. Preparación y Clonado
-
-Asegúrate de estar en tu directorio home. Si ya tienes una carpeta `.config`, haz una copia de seguridad.
+### 1. Clonar el repositorio
+Descarga estos archivos en tu carpeta de configuración local.
 
 ```bash
-# Copia de seguridad (opcional pero recomendada)
-mv ~/.config ~/.config.bak
+# Haz un backup si ya tienes configuraciones previas
+# mv ~/.config ~/.config.bak
 
-# Clonar el repositorio
 git clone [https://github.com/John-NCC/dotfiles.git](https://github.com/John-NCC/dotfiles.git) ~/.config
+
 ```
+## 2. Instalación de Paquetes
+Necesitarás paquetes de los repositorios oficiales y de AUR.
 
-### 2. Instalación de Paquetes (Arch Linux)
 
-Para que todo funcione **out-of-the-box**, necesitas instalar estos paquetes. He separado los oficiales de los de **AUR (Arch User Repository)**.
-
-### Repositorios Oficiales (Pacman)
-
+### Repositorios Oficiales (Pacman):
 ```bash
 sudo pacman -S sway swaybg swayidle waybar pipewire wireplumber pipewire-pulse \
 pavucontrol pulsemixer mpv imv zathura zathura-pdf-mupdf udiskie \
@@ -97,7 +55,10 @@ firefox-developer-edition qalculate-gtk obs-studio grim slurp wl-clipboard \
 polkit-gnome xorg-xwayland python-pynvim
 ```
 
-### AUR (Yay o Paru)
+
+### AUR (Yay o Paru):
+Estas herramientas son vitales para la estética y funciones específicas (como el selector de archivos Yazi o el Blur en bloqueo).
+
 
 ```bash
 paru -S rofi-lbonn-wayland-git swaync swayosd-git sworkstyle \
@@ -105,38 +66,71 @@ swaylock-effects-git cliphist yazi-git xdg-desktop-portal-termfilechooser-git \
 swappy-git
 ```
 
-### 3. Configuración Post-Instalación (CRÍTICO)
 
-#### A. Permisos de Ejecución para Scripts
+## 3. Configuración Post-Instalación (Obligatorio)
+Para que todo funcione correctamente, ejecuta estos comandos finales:
+
+
+### A. Permisos de Ejecución
+Habilita los scripts personalizados para la gestión de inactividad y el selector de archivos.
+
+
 ```bash
 chmod +x ~/.config/xdg-desktop-portal-termfilechooser/yazi-wrapper.sh
 chmod +x ~/.config/swayidle/config
 ```
 
-#### B. Inicialización Limpia de Neovim
+
+### B. Inicializar Neovim
+Limpia cualquier caché previa para permitir que el gestor de plugins (Lazy.nvim) se instale limpiamente.
+
+
 ```bash
-# Borra plugins, caché y estado anterior
 rm -rf ~/.local/share/nvim ~/.cache/nvim ~/.local/state/nvim
 ```
 
-Ahora abre nvim en tu terminal. Verás una pantalla azul instalando plugins. Espera a que termine y reinicia el editor.
 
-#### C. Reiniciar Servicios de Audio
+Abre nvim una vez para que se instalen los plugins y servidores LSP automáticamente.
+
+
+### C. Activar Servicios de Audio
+Aplica la configuración de baja latencia.
+
+
 ```bash
 systemctl --user restart pipewire pipewire-pulse wireplumber
 ```
 
-#### D. Recargar caché de fuentes
+
+### D. Fuentes
+Regenera la caché para detectar las Nerd Fonts.
+
+
 ```bash
 fc-cache -fv
 ```
 
+
+## ⌨️ Atajos de Teclado Principales (Cheat Sheet)
+La tecla modificadora (Mod) es la tecla Super (Windows).
+
+
+| Atajo | Acción |
+|---|---|
+| Mod + Enter | Abrir Terminal (Kitty) |
+| Mod + D | Abrir Lanzador (Rofi) |
+| Mod + T | Abrir Gestor de Archivos (Yazi flotante) |
+| Mod + Shift + T | Abrir Navegador (Firefox Dev) |
+| Mod + N | Abrir Centro de Notificaciones |
+| Mod + Q | Cerrar ventana actual |
+| Mod + F | Pantalla completa |
+| Mod + Shift + Space | Alternar ventana Flotante/Tiling |
+| Mod + Shift + S | Captura de pantalla (Área) + Edición |
+| Mod + Shift + C | Recargar configuración de Sway |
+| Mod + Shift + E | Salir de Sway / Cerrar sesión |
+
+
 ---
 
-🔧 **Detalles de Personalización**
 
-* **Portales XDG:** Configurado `~/.config/xdg-desktop-portal/portals.conf` para usar wlr para capturas de pantalla y termfilechooser (Yazi) para seleccionar archivos.
-* **Neovim:** Migrado de mason-lspconfig handlers externos a internos para evitar errores de carga y se fuerza el uso de Git en Treesitter para descargas robustas.
-* **Limpieza:** Se ha eliminado neofetch (reemplazado por fastfetch) y wob (reemplazado por swayosd).
-
-Producido con ❤️ por **John-NCC**
+Configuración mantenida por John-NCC.
